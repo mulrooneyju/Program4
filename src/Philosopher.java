@@ -15,9 +15,7 @@ public class Philosopher extends Thread
 
    Philosopher()
    {
-       System.out.println ("Created");
-      forks[ID] = new Fork();
-      ID = IDCounter++;
+      
    }
 
    public void curState(States curState)
@@ -36,23 +34,24 @@ public class Philosopher extends Thread
    }
    
 
-   public void run()  
-   { 
-      boolean timeToGO = false;
-   while (!timeToGO) 
-   { 
-   System.out.println (ID + "THINKING"); 
+    public void run()  
+    {
+        ID = IDCounter++;
+    boolean timeToGO = false;
+    while (!timeToGO) 
+    { 
+        System.out.println (ID + "THINKING"); 
         // TODO: think for random number of milliseconds <=1 sec 
-        Random rn = new Random();
+        Random rand = new Random();
         try{
-            int wait = rn.nextInt() % 1000;
+            int wait = rand.nextInt(999) + 1;
             thinking += wait;
             Thread.sleep(wait);
         } catch(InterruptedException e) {}
         
         if(forks[ID].isHeld() == false){
             forks[ID].pickUp();
-            if (ID == numberOfPhilosophers){
+            if (ID == numberOfPhilosophers - 1){
                 if (forks[0].isHeld() == false) {
                     forks[0].pickUp();            
                 }
@@ -64,17 +63,18 @@ public class Philosopher extends Thread
             else { forks[ID].setDown(); }
         }
 
-        System.out.println (ID + "EATING"); 
+        
         // TODO: eat for random number of milliseconds <= 1sec 
         try{
-            int wait = rn.nextInt() % 1000;
+            int wait = rand.nextInt(999) + 1;
             eating += wait;
             Thread.sleep(wait);
         } catch(InterruptedException e) {}
         // TODO: release the fork on the left  
         forks[ID].setDown();
         // TODO: release the fork on the right
-        if(ID == numberOfPhilosophers){
+        System.out.println (ID + "EATING");
+        if(ID == numberOfPhilosophers - 1){
             forks[0].setDown();
         } else { forks[ID + 1].setDown();}
         if(thinking >= 1000){
@@ -87,9 +87,10 @@ public class Philosopher extends Thread
 
    public static void main(String[] args)
    {
-       System.out.println ("THINKING");
+       for (int i = 0; i < numberOfPhilosophers; i++){
+           forks[i] = new Fork();
+       }
        Thread[] philosophers = new Thread[numberOfPhilosophers];
-       System.out.println ("THINKING");
        for (int i = 0; i < numberOfPhilosophers; i++){
            System.out.println ("start");
            philosophers[i] = new Thread(new Philosopher());
