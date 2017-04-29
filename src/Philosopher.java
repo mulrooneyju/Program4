@@ -1,39 +1,56 @@
 
 
+
 public class Philosopher extends Thread 
 { 
-// each Philosopher is assigned an integer ID and two forks 
-private int ID = 0;
+   // each Philosopher is assigned an integer ID and two forks 
+   private int ID = 0;
+   public enum States{THINKING, EATING,WAIT_LEFT_FORK, WAIT_RIGHT_FORK};
 
 
 
-Philosopher()
-{
-   this.ID = ;
-}
+   Philosopher()
+   {
+      
+   }
+
+   public void curState(States curState)
+   {
+      switch(curState)
+      {
+         case THINKING:
+            break;
+         case EATING:
+            break;
+         case WAIT_LEFT_FORK:
+            break;
+         default://default WAIT_RIGHT_FORK
+            break;
+      }
+   }
    
-public void run()  
-{ 
-   boolean timeToGO = false;
-while (!timeToGO) 
-{ 
-System.out.println (ID+ "THINKING"); 
-// TODO: think for random number of milliseconds <=1 sec 
-// TODO: obtain the fork on the left 
-// TODO: obtain the fork on the right 
-System.out.println (ID + "EATING"); 
-// TODO: eat for random number of milliseconds <= 1sec 
-// TODO: release the fork on the left  
-// TODO: release the fork on the right
-timeToGO = !timeToGO;
-} 
 
-System.out.println(ID+ "DONE");
-} 
+   public void run()  
+   { 
+      boolean timeToGO = false;
+   while (!timeToGO) 
+   { 
+   System.out.println (ID+ "THINKING"); 
+   // TODO: think for random number of milliseconds <=1 sec 
+   // TODO: obtain the fork on the left 
+   // TODO: obtain the fork on the right 
+   System.out.println (ID + "EATING"); 
+   // TODO: eat for random number of milliseconds <= 1sec 
+   // TODO: release the fork on the left  
+   // TODO: release the fork on the right
+   timeToGO = !timeToGO;
+   } 
 
-public static void main(String[] args)
-{
-   Philosopher tom = new Philosopher();
-   tom.run();
-}
+   System.out.println(ID+ "DONE");
+   } 
+
+   public static void main(String[] args)
+   {
+      
+   }
 }
