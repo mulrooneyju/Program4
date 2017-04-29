@@ -1,14 +1,27 @@
-/**
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 
-/**
- 
- @author Justin
- */
 public class Fork 
 {
+   private boolean beingHeld;
+   private static int numForks = 0;
+   
+   public Fork()
+   {
+      numForks++;
+      beingHeld = false;
+   }
+   
+   public boolean isHeld()
+   {
+      return beingHeld;
+   }
 
+   public void setDown()
+   {
+      beingHeld = false;
+   }
+   
+   public void pickUp()
+   {
+      beingHeld = true;
+   }
 }
