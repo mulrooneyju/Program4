@@ -2,11 +2,8 @@
 public class Fork 
 {
    private boolean beingHeld;
-   private static int numForks = 0;
-   
    public Fork()
    {
-      numForks++;
       beingHeld = false;
    }
    
